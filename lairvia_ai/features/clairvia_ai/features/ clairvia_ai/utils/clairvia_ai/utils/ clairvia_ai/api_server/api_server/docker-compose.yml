@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  clairvia-backend:
+    build:
+      context: ./api_server
+      dockerfile: Dockerfile
+    container_name: clairvia_backend
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY:-}
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 4G
